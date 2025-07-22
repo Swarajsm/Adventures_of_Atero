@@ -28,19 +28,29 @@ public class Player extends Entity {
     }
 
     public void update(){
+        if (keyH.downPressed || keyH.upPressed || keyH.leftPressed || keyH.rightPressed) {
+            handleMovement();
+            if (++spriteCounter > 15) {
+                spriteNum = (spriteNum == 1) ? 2 : 1;
+                spriteCounter = 0;
+            }
+        }
+    }
+
+    private void handleMovement() {
         if(keyH.upPressed) {
             direction = "up";
             y -= speed;
         }
-        if(keyH.downPressed) {
+        else if(keyH.downPressed) {
             direction = "down";
             y += speed;
         }
-        if(keyH.leftPressed) {
+        else if(keyH.leftPressed) {
             direction = "left";
             x -= speed;
         }
-        if(keyH.rightPressed) {
+        else if(keyH.rightPressed) {
             direction = "right";
             x += speed;
         }
@@ -53,16 +63,16 @@ public class Player extends Entity {
         BufferedImage image = null;
         switch(direction){
             case "up":
-                image = up1;
+                if (spriteNum ==1){ image = up1;} else if (spriteNum == 2) {image = up2;}
                 break;
             case "down":
-                image = down1;
+                if (spriteNum ==1){ image = down1;} else if (spriteNum == 2) {image = down2;}
                 break;
             case "left":
-                image = left1;
+                if (spriteNum ==1){ image = left1;} else if (spriteNum == 2) {image = left2;}
                 break;
             case "right":
-                image = right1;
+                if (spriteNum ==1){ image = right1;} else if (spriteNum == 2) {image = right2;}
                 break;
         }
 
